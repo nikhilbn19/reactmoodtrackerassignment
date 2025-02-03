@@ -21,9 +21,9 @@ const MoodEntry = ({ addMood }) => {
   };
 
   return (
-    <div className="mood-entry">
+    <div className="mb-5 p-4 bg-white rounded-lg shadow-md">
       <select
-        className="emoji-select"
+        className="p-3 border rounded-lg text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={selectedEmoji}
         onChange={handleMoodChange}
       >
@@ -34,12 +34,15 @@ const MoodEntry = ({ addMood }) => {
       </select>
       <input
         type="text"
-        className="mood-text"
+        className="p-3 ml-3 border rounded-lg text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder="What's on your mind?"
         value={moodText}
         onChange={handleTextChange}
       />
-      <button onClick={handleAddMood} className="add-mood-btn">
+      <button
+        onClick={handleAddMood}
+        className="ml-3 px-5 py-3 bg-blue-500 text-white rounded-lg transition-all duration-300 hover:bg-blue-700"
+      >
         Add Mood
       </button>
     </div>

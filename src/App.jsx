@@ -8,16 +8,22 @@ const App = () => {
   const [currentTab, setCurrentTab] = useState("Mood List");
   const [undoStack, setUndoStack] = useState([]);
 
+  // Load moods from localStorage on first render
   useEffect(() => {
     const savedMoods = localStorage.getItem("moods");
-    if (savedMoods) {
+    console.log("Loaded from localStorage:", savedMoods); // Debug log
+
+    if (savedMoods && savedMoods !== "[]") {
       setMoods(JSON.parse(savedMoods));
     }
   }, []);
 
+  // Save moods to localStorage when moods change
   useEffect(() => {
     if (moods.length > 0) {
       localStorage.setItem("moods", JSON.stringify(moods));
+    } else {
+      localStorage.removeItem("moods"); // Remove if moods are empty
     }
   }, [moods]);
 
@@ -49,6 +55,8 @@ const App = () => {
   const clearMoods = () => {
     setMoods([]);
     setUndoStack([]);
+    localStorage.removeItem("moods"); // Ensure it's removed
+    console.log("Cleared localStorage"); // Debug log
   };
 
   return (
@@ -66,7 +74,6 @@ const App = () => {
 
         {currentTab === "Mood List" && (
           <div className="mt-6">
-            {/* Updated Spacing */}
             <div className="flex flex-wrap gap-4 justify-center items-center p-4">
               <MoodEntry addMood={addMood} />
             </div>
